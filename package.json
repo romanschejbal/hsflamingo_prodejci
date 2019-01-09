@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "node ./build-non-split.js",
+    "build": "node ./build-non-split.js && mv build/static/js/*.js build/static/js/gmap.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
