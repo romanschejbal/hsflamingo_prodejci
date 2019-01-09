@@ -29,7 +29,7 @@ class App extends Component {
                 >
                   <div>
                     <h4>{prodejce.nazev}</h4>
-                    <p>Makáááme</p>
+                    <p>...</p>
                   </div>
                 </InfoWindow>
               ) : null}
