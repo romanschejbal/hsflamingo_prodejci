@@ -5,16 +5,8 @@ import App from "./App";
 // import * as serviceWorker from "./serviceWorker";
 
 export default function renderMap(data, container) {
-  ReactDOM.render(
-    <App
-      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyB_LaaS3U3CFKlscbug2He-GDAKPstQVds"
-      loadingElement={"Načítám"}
-      containerElement={<div style={{ height: window.innerHeight }} />}
-      mapElement={<div style={{ height: `100%` }} />}
-      prodejci={data}
-    />,
-    container
-  );
+  const height = container.offsetHeight;
+  ReactDOM.render(<App prodejci={data} height={height} />, container);
 
   return () => ReactDOM.unmountComponentAtNode(container);
 }

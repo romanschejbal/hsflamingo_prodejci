@@ -26,10 +26,12 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root" style="height: 500px;"></div>
     <script>
       window.onload = function() {
-        renderMap([], document.getElementById("root"));
+        var prodejci =
+          '[{"nazev":"M.A.T. Group","ulice":"Růžové náměstí 1651 ","psc":"35601 ","mesto":"Sokolov ","telefon":"+420352623869 ","email":"sokolov@matgroup.cz","lat":50.181884,"lng":13.64054,"url":"/wp2/hs_prodejci/m-a-t-group"},{"nazev":"24 mall s.r.o. Opava","ulice":"Hlavní 64a ","psc":"74706 ","mesto":"Opava ","telefon":"773241024 ","email":"obchod@24mall.cz","lat":49.920129,"lng":15.921026,"url":"/wp2/hs_prodejci/24-mall-s-r-o-opava"},{"nazev":"ŽELEZÁŘSTVÍ Andrlík s.r.o.","ulice":"Máchova alej 2177/7","psc":"56802","mesto":"Svitavy","telefon":"+420 777 725 069","email":"obchod@kamnaandrlik.cz","lat":49.75458,"lng":16.471093,"url":"/wp2/hs_prodejci/zelezarstvi-andrlik-s-r-o"}]';
+        renderMap(JSON.parse(prodejci), document.getElementById("root"));
       };
     </script>
     <!--
