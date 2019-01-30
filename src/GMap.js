@@ -28,7 +28,16 @@ class GMap extends Component {
               >
                 <div>
                   <h4>{prodejce.nazev}</h4>
-                  <p>...</p>
+                  <p>
+                    {prodejce.ulice}
+                    <br />
+                    {prodejce.psc} {prodejce.mesto}
+                    <br />
+                    Tel.: {prodejce.telefon}
+                    <br />
+                    E-mail:{" "}
+                    <a href={`mailto:${prodejce.email}`}>{prodejce.email}</a>
+                  </p>
                   <a href={url}>Podrobné informace</a>
                 </div>
               </InfoWindow>
