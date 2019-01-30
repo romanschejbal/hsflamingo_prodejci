@@ -40,4 +40,18 @@ class GMap extends Component {
   }
 }
 
-export default withScriptjs(withGoogleMap(GMap));
+const ConnectedMap = withScriptjs(withGoogleMap(GMap));
+
+export default function Map(props) {
+  const { prodejci, height } = props;
+
+  return (
+    <ConnectedMap
+      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyB_LaaS3U3CFKlscbug2He-GDAKPstQVds"
+      loadingElement={"Načítám"}
+      containerElement={<div style={{ height: `${height}px` }} />}
+      mapElement={<div style={{ height: `${height}px` }} />}
+      prodejci={prodejci}
+    />
+  );
+}

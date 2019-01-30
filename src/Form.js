@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import GMap from "./GMap";
-import { EWOULDBLOCK } from "constants";
 
 class Form extends Component {
   ref = React.createRef();
@@ -159,21 +157,9 @@ class Form extends Component {
 
 class App extends Component {
   state = { height: 0 };
+
   render() {
-    const { prodejci, height } = this.props;
-    const mapHeight = height - this.state.height;
-    return (
-      <>
-        <Form onMount={el => this.setState({ height: el.offsetHeight })} />
-        <GMap
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyB_LaaS3U3CFKlscbug2He-GDAKPstQVds"
-          loadingElement={"Načítám"}
-          containerElement={<div style={{ height: `${mapHeight}px` }} />}
-          mapElement={<div style={{ height: `${mapHeight}px` }} />}
-          prodejci={prodejci}
-        />
-      </>
-    );
+    return <Form onMount={el => this.setState({ height: el.offsetHeight })} />;
   }
 }
 
