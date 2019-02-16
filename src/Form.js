@@ -10,7 +10,10 @@ class Form extends Component {
   render() {
     return (
       <form ref={this.ref} className="ff-custom-form fg-text-dark" action="#">
-        <div className="ffb-id-2m4m6dth fg-row row     fg-text-dark">
+        <div
+          style={{ padding: "30px 0" }}
+          className="ffb-id-2m4m6dth fg-row row fg-text-dark"
+        >
           <div className="ffb-id-2m4mofr8 fg-col col-xs-12 col-md-5 fg-text-dark">
             <h1
               className="ffb-id-2m4glikf fg-heading text-center    fg-text-dark"
@@ -18,7 +21,7 @@ class Form extends Component {
             >
               Naši prodejci
             </h1>
-            <input
+            {/* <input
               className="ffb-id-2m4ftnpj form-control ff-form-input ff-form-input-item fg-text-dark"
               type="text"
               data-name="ProdejceMisto:"
@@ -27,9 +30,9 @@ class Form extends Component {
               data-validation='{"checkbox-validation":"0","checkbox-validation-message":"Checking this box is required.","is-required":"1","is-required-message":"jak\u00e9 hled\u00e1te m\u00edsto?","validation-type":"none","validation-type-regex":"","validation-type-custom-function":"","validation-message":"This field is not valid.","min-length-has":"1","min-length":"2","min-length-message":"Zadejte jm\u00e9no m\u011bsta, kter\u00e9 hled\u00e1te."}'
               style={{ display: "inline" }}
               name="ff-contact-input-0"
-            />
+            /> */}
           </div>
-          <div className="ffb-id-2m4m6ltd fg-col col-xs-12 col-md-3 fg-text-dark">
+          <div className="ffb-id-2m4m6ltd fg-col col-xs-6 col-md-3 fg-text-dark">
             <div
               className="ffb-id-2m4lja3i checkbox ff-form-checkbox-wrapper fg-text-dark"
               data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
@@ -106,7 +109,7 @@ class Form extends Component {
               </label>
             </div>
           </div>
-          <div className="ffb-id-2m4m6lb5 fg-col col-xs-12 col-md-4 fg-text-dark">
+          <div className="ffb-id-2m4m6lb5 fg-col col-xs-6 col-md-4 fg-text-dark">
             <div className="ffb-id-2m4n9dih fg-row row     fg-text-dark">
               <div
                 className="ffb-id-2m4n9dii fg-col col-xs-12 col-md-12 fg-text-dark"
@@ -115,25 +118,27 @@ class Form extends Component {
                 <div className="fg-vcenter-wrapper">
                   <div className="fg-vcenter">
                     <p
-                      className="ffb-id-2m4n9dim fg-paragraph text-left    fg-text-dark"
+                      className="ffb-id-2m4n9dim fg-paragraph text-left fg-text-dark"
                       style={{ display: "inline" }}
                     >
                       Expert
                     </p>
                     <img
+                      style={{ margin: "0 20px" }}
                       className="ffb-id-2m4n9dil fg-image  img-responsive fg-text-dark"
-                      src="http://www.krivka.net/wp2/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
+                      src="http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
                       alt="map-v4-Expert@2x"
                     />
                     <p
-                      className="ffb-id-2m4n9dir fg-paragraph text-left    fg-text-dark"
+                      className="ffb-id-2m4n9dir fg-paragraph text-left fg-text-dark"
                       style={{ display: "inline" }}
                     >
                       Partner
                     </p>
                     <img
+                      style={{ margin: "0 20px" }}
                       className="ffb-id-2m4n9diq fg-image  img-responsive fg-text-dark"
-                      src="http://www.krivka.net/wp2/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
+                      src="http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
                       alt="map-v4-Partner@2x"
                     />
                   </div>
