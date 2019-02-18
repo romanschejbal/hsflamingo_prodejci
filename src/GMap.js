@@ -19,6 +19,12 @@ class GMap extends Component {
         {this.props.prodejci.map(({ lat, lng, url, ...prodejce }, i) => (
           <Marker
             key={i}
+            icon={{
+              scaledSize: { width: 27, height: 40 },
+              url: prodejce.isExpert
+                ? "http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
+                : "http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
+            }}
             position={{ lat, lng }}
             onClick={() => this.setState({ openedMarker: i })}
           >
