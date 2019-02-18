@@ -66,3 +66,29 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+```
+$posts = get_posts(array(
+  "post_type" => "hs_prodejci",
+  "numberposts" => -1
+));
+
+$prodejci = [];
+foreach ($posts as $post) {
+  $fields = get_post_meta($post->ID);
+  $prodejci[] = array(
+    "nazev" => $post->post_title,
+    "ulice" => $fields["ulice"][0],
+    "psc" => $fields["psc"][0],
+    "mesto" => $fields["mesto"][0],
+    "telefon" => $fields["telefon"][0],
+    "email" => $fields["email_zobrazeni"][0],
+    "lat" => floatval($fields["souradnice_x"][0]),
+    "lng" => floatval($fields["souradnice_y"][0]),
+    "url" => "/wp2/hs_prodejci/" . $post->post_name
+  );
+}
+
+$json = json_encode($prodejci);
+echo "<script>window.prodejci = " . $json . "</script>";
+```
