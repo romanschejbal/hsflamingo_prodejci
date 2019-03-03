@@ -190,7 +190,14 @@ class GMap extends Component {
         {this.props.prodejci
           .filter(p => {
             const reg = new RegExp(this.props.searchingValue, "i");
-            return reg.test(p.nazev) || reg.test(p.ulice) || reg.test(p.mesto);
+            return (
+              reg.test(p.nazev) ||
+              reg.test(p.ulice) ||
+              reg.test(p.mesto) ||
+              reg.test(p.psc) ||
+              reg.test(p.telefon) ||
+              reg.test(p.email)
+            );
           })
           .map(({ lat, lng, url, ...prodejce }, i) => (
             <Marker
