@@ -8,8 +8,29 @@ import GMap from "./GMap";
 export default function renderMap(data, formContainer, mapContainer) {
   const formHeight = formContainer.offsetHeight;
   const mapHeight = mapContainer.offsetHeight;
-  ReactDOM.render(<Form prodejci={data} height={formHeight} />, formContainer);
-  ReactDOM.render(<GMap prodejci={data} height={mapHeight} />, mapContainer);
+  let searchingValue = "";
+  function renderMap() {
+    ReactDOM.render(
+      <GMap
+        prodejci={data}
+        height={mapHeight}
+        searchingValue={searchingValue}
+      />,
+      mapContainer
+    );
+  }
+  ReactDOM.render(
+    <Form
+      prodejci={data}
+      height={formHeight}
+      onSearch={value => {
+        searchingValue = value;
+        renderMap();
+      }}
+    />,
+    formContainer
+  );
+  renderMap();
 
   return () => {
     ReactDOM.unmountComponentAtNode(formContainer);
