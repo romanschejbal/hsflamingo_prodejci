@@ -185,7 +185,7 @@ class GMap extends Component {
       <GoogleMap
         options={{ styles: colorScheme }}
         defaultZoom={8}
-        defaultCenter={{ lat: 49.75458, lng: 15.471093 }}
+        defaultCenter={{ lat: 49.15458, lng: 17.471093 }}
       >
         {this.props.prodejci
           .filter(p => {
