@@ -11,7 +11,7 @@ export default function Form({ onSearch }) {
   return (
     <form ref={ref} className="ff-custom-form fg-text-dark" action="#">
       <div
-        style={{ padding: "30px 0" }}
+        style={{ padding: "20px 0px 10px" }}
         className="ffb-id-2m4m6dth fg-row row fg-text-dark"
       >
         <div className="ffb-id-2m4mofr8 fg-col col-xs-12 col-md-5 fg-text-dark">
@@ -37,7 +37,7 @@ export default function Form({ onSearch }) {
         </div>
         <div className="ffb-id-2m4m6ltd fg-col col-xs-6 col-md-3 fg-text-dark">
           <div
-            className="ffb-id-2m4lja3i checkbox ff-form-checkbox-wrapper fg-text-dark"
+            className="ffb-id-2m4lja3i checkbox fg-text-dark"
             data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
             style={{ display: "block" }}
           >
@@ -62,7 +62,7 @@ export default function Form({ onSearch }) {
             </label>
           </div>
           <div
-            className="ffb-id-2m4lvnep checkbox ff-form-checkbox-wrapper fg-text-dark"
+            className="ffb-id-2m4lvnep checkbox fg-text-dark"
             data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
             style={{ display: "block" }}
           >
@@ -87,7 +87,7 @@ export default function Form({ onSearch }) {
             </label>
           </div>
           <div
-            className="ffb-id-2m4lv7hq checkbox ff-form-checkbox-wrapper fg-text-dark"
+            className="ffb-id-2m4lv7hq checkbox fg-text-dark"
             data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
             style={{ display: "block" }}
           >
@@ -127,7 +127,7 @@ export default function Form({ onSearch }) {
                     Expert
                   </p>
                   <img
-                    style={{ margin: "0 20px" }}
+                    style={{ margin: "0 20px", width: "30px" }}
                     className="ffb-id-2m4n9dil fg-image  img-responsive fg-text-dark"
                     src="http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
                     alt="map-v4-Expert@2x"
@@ -139,7 +139,7 @@ export default function Form({ onSearch }) {
                     Partner
                   </p>
                   <img
-                    style={{ margin: "0 20px" }}
+                    style={{ margin: "0 20px", width: "30px" }}
                     className="ffb-id-2m4n9diq fg-image  img-responsive fg-text-dark"
                     src="http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
                     alt="map-v4-Partner@2x"

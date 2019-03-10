@@ -201,7 +201,7 @@ class GMap extends Component {
           })
           .map(({ lat, lng, url, ...prodejce }, i) => (
             <Marker
-              key={i}
+              key={JSON.stringify({ lat, lng, ...prodejce })}
               icon={{
                 scaledSize: { width: 27, height: 40 },
                 url: prodejce.isExpert
