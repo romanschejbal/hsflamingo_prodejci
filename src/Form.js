@@ -16,8 +16,12 @@ export default function Form({ onSearch }) {
       >
         <div className="ffb-id-2m4mofr8 fg-col col-xs-12 col-md-5 fg-text-dark">
           <h1
-            className="ffb-id-2m4glikf fg-heading text-center    fg-text-dark"
-            style={{ display: "inline" }}
+            className="ffb-id-2m4glikf fg-heading text-center fg-text-dark"
+            style={{
+              display: "inline",
+              fontFamily: "Montserrat",
+              fontWeight: 500
+            }}
           >
             Naši prodejci
           </h1>
