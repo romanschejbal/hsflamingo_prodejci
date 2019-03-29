@@ -209,7 +209,7 @@ class GMap extends Component {
                   : "http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
               }}
               position={{ lat, lng }}
-              onClick={() => this.setState({ openedMarker: i })}
+              onMouseOver={() => this.setState({ openedMarker: i })}
             >
               {this.state.openedMarker === i ? (
                 <InfoWindow

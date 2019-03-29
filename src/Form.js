@@ -39,7 +39,7 @@ export default function Form({ onSearch }) {
             />
           </p>
         </div>
-        <div className="ffb-id-2m4m6ltd fg-col col-xs-6 col-md-3 fg-text-dark">
+        {/* <div className="ffb-id-2m4m6ltd fg-col col-xs-6 col-md-3 fg-text-dark">
           <div
             className="ffb-id-2m4lja3i checkbox fg-text-dark"
             data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
@@ -115,7 +115,7 @@ export default function Form({ onSearch }) {
               Topenář
             </label>
           </div>
-        </div>
+        </div> */}
         <div className="ffb-id-2m4m6lb5 fg-col col-xs-6 col-md-4 fg-text-dark">
           <div className="ffb-id-2m4n9dih fg-row row     fg-text-dark">
             <div
