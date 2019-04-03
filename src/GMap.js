@@ -188,6 +188,11 @@ class GMap extends Component {
         defaultCenter={{ lat: 49.15458, lng: 17.471093 }}
       >
         {this.props.prodejci
+          .filter(p =>
+            this.props.searchingCategories.some(
+              category => p.popis.toLowerCase().indexOf(category) !== -1
+            )
+          )
           .filter(p => {
             const reg = new RegExp(this.props.searchingValue, "i");
             return (
@@ -241,7 +246,7 @@ class GMap extends Component {
 const ConnectedMap = withScriptjs(withGoogleMap(GMap));
 
 export default function Map(props) {
-  const { prodejci, height, searchingValue } = props;
+  const { prodejci, height, searchingValue, searchingCategories } = props;
 
   return (
     <ConnectedMap
@@ -251,6 +256,7 @@ export default function Map(props) {
       mapElement={<div style={{ height: `${height}px` }} />}
       prodejci={prodejci}
       searchingValue={searchingValue}
+      searchingCategories={searchingCategories}
     />
   );
 }

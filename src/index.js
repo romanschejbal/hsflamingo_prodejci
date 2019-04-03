@@ -8,23 +8,35 @@ import GMap from "./GMap";
 export default function renderMap(data, formContainer, mapContainer) {
   const formHeight = formContainer.offsetHeight;
   const mapHeight = mapContainer.offsetHeight;
+  const categories = ["Stavba krbů", "Kamenný obchod", "Topenář"];
   let searchingValue = "";
+  let searchingCategories = categories.slice(0);
   function renderMap() {
     ReactDOM.render(
       <GMap
         prodejci={data}
         height={mapHeight}
         searchingValue={searchingValue}
+        searchingCategories={searchingCategories}
       />,
       mapContainer
     );
   }
   ReactDOM.render(
     <Form
+      categories={categories}
       prodejci={data}
       height={formHeight}
       onSearch={value => {
         searchingValue = value;
+        renderMap();
+      }}
+      onCategoryChange={(category, checked) => {
+        if (checked) {
+          searchingCategories.push(category);
+        } else {
+          searchingCategories = searchingCategories.filter(c => c !== category);
+        }
         renderMap();
       }}
     />,

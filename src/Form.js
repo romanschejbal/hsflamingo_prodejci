@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 
-export default function Form({ onSearch }) {
+export default function Form({ onSearch, categories, onCategoryChange }) {
   const ref = useRef();
   const [height, setHeight] = useState(0);
 
@@ -39,83 +39,31 @@ export default function Form({ onSearch }) {
             />
           </p>
         </div>
-        {/* <div className="ffb-id-2m4m6ltd fg-col col-xs-6 col-md-3 fg-text-dark">
-          <div
-            className="ffb-id-2m4lja3i checkbox fg-text-dark"
-            data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
-            style={{ display: "block" }}
-          >
-            <label>
-              <input
-                type="hidden"
-                defaultValue="[0]"
-                name="ff-contact-input-1"
-              />
-              <input
-                type="checkbox"
-                data-name="map_select_stavba_krbu"
-                defaultValue="[1]"
-                className="ff-form-input ff-form-input-item"
-                data-checked={1}
-                defaultChecked="checked"
-                data-input-type="checkbox"
-                data-validation='{"checkbox-validation":"0","checkbox-validation-message":"Checking this box is required.","is-required":"1","is-required-message":"This field is required.","validation-type":"none","validation-type-regex":"","validation-type-custom-function":"","validation-message":"This field is not valid.","min-length-has":"0","min-length":"10","min-length-message":"Minimal length is 10 characters"}'
-                name="ff-contact-input-1"
-              />{" "}
-              Stavba krbů
-            </label>
-          </div>
-          <div
-            className="ffb-id-2m4lvnep checkbox fg-text-dark"
-            data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
-            style={{ display: "block" }}
-          >
-            <label>
-              <input
-                type="hidden"
-                defaultValue="[0]"
-                name="ff-contact-input-2"
-              />
-              <input
-                type="checkbox"
-                data-name="map_select_obchod"
-                defaultValue="[1]"
-                className="ff-form-input ff-form-input-item"
-                data-checked={1}
-                defaultChecked="checked"
-                data-input-type="checkbox"
-                data-validation='{"checkbox-validation":"0","checkbox-validation-message":"Checking this box is required.","is-required":"1","is-required-message":"This field is required.","validation-type":"none","validation-type-regex":"","validation-type-custom-function":"","validation-message":"This field is not valid.","min-length-has":"0","min-length":"10","min-length-message":"Minimal length is 10 characters"}'
-                name="ff-contact-input-2"
-              />{" "}
-              Kamenný obchod
-            </label>
-          </div>
-          <div
-            className="ffb-id-2m4lv7hq checkbox fg-text-dark"
-            data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
-            style={{ display: "block" }}
-          >
-            <label>
-              <input
-                type="hidden"
-                defaultValue="[0]"
-                name="ff-contact-input-3"
-              />
-              <input
-                type="checkbox"
-                data-name="map_select_topenar"
-                defaultValue="[1]"
-                className="ff-form-input ff-form-input-item"
-                data-checked={1}
-                defaultChecked="checked"
-                data-input-type="checkbox"
-                data-validation='{"checkbox-validation":"0","checkbox-validation-message":"Checking this box is required.","is-required":"1","is-required-message":"This field is required.","validation-type":"none","validation-type-regex":"","validation-type-custom-function":"","validation-message":"This field is not valid.","min-length-has":"0","min-length":"10","min-length-message":"Minimal length is 10 characters"}'
-                name="ff-contact-input-3"
-              />{" "}
-              Topenář
-            </label>
-          </div>
-        </div> */}
+        <div className="ffb-id-2m4m6ltd fg-col col-xs-6 col-md-3 fg-text-dark">
+          {categories.map(text => {
+            return (
+              <div
+                key={text}
+                className="ffb-id-2m4lja3i checkbox fg-text-dark"
+                data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
+                style={{ display: "block" }}
+              >
+                <label>
+                  <input
+                    type="checkbox"
+                    className="ff-form-input ff-form-input-item"
+                    defaultChecked="checked"
+                    value={text}
+                    onChange={e =>
+                      onCategoryChange(e.target.value, e.target.checked)
+                    }
+                  />{" "}
+                  {text}
+                </label>
+              </div>
+            );
+          })}
+        </div>
         <div className="ffb-id-2m4m6lb5 fg-col col-xs-6 col-md-4 fg-text-dark">
           <div className="ffb-id-2m4n9dih fg-row row     fg-text-dark">
             <div
