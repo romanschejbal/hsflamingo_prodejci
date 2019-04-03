@@ -81,7 +81,7 @@ export default function Form({ onSearch, categories, onCategoryChange }) {
                   <img
                     style={{ margin: "0 20px", width: "30px" }}
                     className="ffb-id-2m4n9dil fg-image  img-responsive fg-text-dark"
-                    src="http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
+                    src="http://www.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
                     alt="map-v4-Expert@2x"
                   />
                   <p
@@ -93,7 +93,7 @@ export default function Form({ onSearch, categories, onCategoryChange }) {
                   <img
                     style={{ margin: "0 20px", width: "30px" }}
                     className="ffb-id-2m4n9diq fg-image  img-responsive fg-text-dark"
-                    src="http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
+                    src="http://www.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
                     alt="map-v4-Partner@2x"
                   />
                 </div>
