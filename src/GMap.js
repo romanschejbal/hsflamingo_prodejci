@@ -190,7 +190,8 @@ class GMap extends Component {
         {this.props.prodejci
           .filter(p =>
             this.props.searchingCategories.some(
-              category => p.popis.toLowerCase().indexOf(category) !== -1
+              category =>
+                p.popis.toLowerCase().indexOf(category.toLowerCase()) !== -1
             )
           )
           .filter(p => {
