@@ -211,8 +211,8 @@ class GMap extends Component {
               icon={{
                 scaledSize: { width: 27, height: 40 },
                 url: prodejce.isExpert
-                  ? "http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
-                  : "http://beta.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
+                  ? "https://www.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
+                  : "https://www.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
               }}
               position={{ lat, lng }}
               onMouseOver={() => this.setState({ openedMarker: i })}
