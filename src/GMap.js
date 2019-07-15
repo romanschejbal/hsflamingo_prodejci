@@ -216,6 +216,7 @@ class GMap extends Component {
               }}
               position={{ lat, lng }}
               onMouseOver={() => this.setState({ openedMarker: i })}
+              onClick={() => this.setState({ openedMarker: i })}
             >
               {this.state.openedMarker === i ? (
                 <InfoWindow
