@@ -257,7 +257,8 @@ export default function Map(props) {
     height,
     searchingValue,
     searchingCategories,
-    googleKey
+    googleKey,
+    defaultZoom
   } = props;
 
   return (
@@ -269,6 +270,7 @@ export default function Map(props) {
       prodejci={prodejci}
       searchingValue={searchingValue}
       searchingCategories={searchingCategories}
+      defaultZoom={defaultZoom}
     />
   );
 }
