@@ -191,7 +191,9 @@ class GMap extends Component {
           .filter(p =>
             this.props.searchingCategories.some(
               category =>
-                p.popis.toLowerCase().indexOf(category.toLowerCase()) !== -1
+                (p.popis || "")
+                  .toLowerCase()
+                  .indexOf(category.toLowerCase()) !== -1
             )
           )
           .filter(p => {
@@ -248,11 +250,17 @@ class GMap extends Component {
 const ConnectedMap = withScriptjs(withGoogleMap(GMap));
 
 export default function Map(props) {
-  const { prodejci, height, searchingValue, searchingCategories } = props;
+  const {
+    prodejci,
+    height,
+    searchingValue,
+    searchingCategories,
+    googleKey
+  } = props;
 
   return (
     <ConnectedMap
-      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyB_LaaS3U3CFKlscbug2He-GDAKPstQVds"
+      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${googleKey}`}
       loadingElement={"Načítám"}
       containerElement={<div style={{ height: `${height}px` }} />}
       mapElement={<div style={{ height: `${height}px` }} />}

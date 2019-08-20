@@ -30,12 +30,16 @@
     <div id="mapa" style="height: 400px;"></div>
     <script>
       var prodejci =
-        '[{"nazev":"M.A.T. Group","ulice":"Růžové náměstí 1651 ","psc":"35601 ","mesto":"Sokolov ","telefon":"+420352623869 ","email":"sokolov@matgroup.cz","lat":50.181884,"lng":13.64054,"url":"/wp2/hs_prodejci/m-a-t-group"},{"nazev":"24 mall s.r.o. Opava","ulice":"Hlavní 64a ","psc":"74706 ","mesto":"Opava ","telefon":"773241024 ","email":"obchod@24mall.cz","lat":49.920129,"lng":15.921026,"url":"/wp2/hs_prodejci/24-mall-s-r-o-opava"},{"nazev":"ŽELEZÁŘSTVÍ Andrlík s.r.o.","ulice":"Máchova alej 2177/7","psc":"56802","mesto":"Svitavy","telefon":"+420 777 725 069","email":"obchod@kamnaandrlik.cz","lat":49.75458,"lng":16.471093,"url":"/wp2/hs_prodejci/zelezarstvi-andrlik-s-r-o"}]';
+        '[{"nazev":"Tehelňa STOVA, s.r.o.","ulice":"Letecká 35","psc":"052 01","mesto":"Spišská Nová Ves","stat":"Slovenská republika","telefon":"+421 534 172 777, +421 911 892 777","email":"baumarket@stova.sk","lat":48.9397,"lng":20.5476,"url":"/wp2/hs_prodejci/tehelna-stova-spol-s-r-o-stova-baumarket","isExpert":false,"popis":"POPOOPOPO topenář"},{"nazev":"Sámel Lukáš - LEMAS","ulice":"Lehôtka pod Brehmi 56","psc":"966 01","mesto":"Hliník nad Hronom","stat":"Slovenská republika","telefon":"0918 364 929","email":"krpeka@krpeka.sk","lat":48.545273,"lng":18.81133,"url":"/wp2/hs_prodejci/samel-lukas-krby-pece-kachle-lemas","isExpert":false,"popis":"POPOPOPO kamenný obchod"}]';
     </script>
     <script>
       window.onload = function() {
         renderMap(
-          JSON.parse(prodejci),
+          {
+            data: JSON.parse(prodejci),
+            language: "cs",
+            googleKey: "AIzaSyB_LaaS3U3CFKlscbug2He-GDAKPstQVds"
+          },
           document.getElementById("form"),
           document.getElementById("mapa")
         );

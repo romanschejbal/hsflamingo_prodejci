@@ -5,10 +5,15 @@ import Form from "./Form";
 import GMap from "./GMap";
 // import * as serviceWorker from "./serviceWorker";
 
-export default function renderMap(data, formContainer, mapContainer) {
+export default function renderMap(
+  { data, language, googleKey },
+  formContainer,
+  mapContainer
+) {
   const formHeight = formContainer.offsetHeight;
   const mapHeight = mapContainer.offsetHeight;
-  const categories = ["Stavba krbů", "Kamenný obchod", "Topenář"];
+  const categories =
+    language === "cs" ? ["Stavba krbů", "Kamenný obchod", "Topenář"] : [];
   let searchingValue = "";
   let searchingCategories = categories.slice(0);
   function renderMap() {
@@ -18,12 +23,14 @@ export default function renderMap(data, formContainer, mapContainer) {
         height={mapHeight}
         searchingValue={searchingValue}
         searchingCategories={searchingCategories}
+        googleKey={googleKey}
       />,
       mapContainer
     );
   }
   ReactDOM.render(
     <Form
+      language={language}
       categories={categories}
       prodejci={data}
       height={formHeight}

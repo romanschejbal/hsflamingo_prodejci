@@ -1,6 +1,22 @@
 import React, { useRef, useEffect, useState } from "react";
 
-export default function Form({ onSearch, categories, onCategoryChange }) {
+const t = {
+  header: {
+    cs: "Naši prodejci",
+    en: "Our dealers"
+  },
+  searchInput: {
+    cs: "Hledej",
+    en: "Search"
+  }
+};
+
+export default function Form({
+  language,
+  onSearch,
+  categories,
+  onCategoryChange
+}) {
   const ref = useRef();
   const [height, setHeight] = useState(0);
 
@@ -23,14 +39,14 @@ export default function Form({ onSearch, categories, onCategoryChange }) {
               fontWeight: 500
             }}
           >
-            Naši prodejci
+            {t.header[language]}
           </h1>
           <p>
             <input
               className="ffb-id-2m4ftnpj form-control ff-form-input ff-form-input-item fg-text-dark"
               type="text"
               data-name="ProdejceMisto:"
-              placeholder="Hledej"
+              placeholder={t.searchInput[language]}
               data-input-type="text"
               data-validation='{"checkbox-validation":"0","checkbox-validation-message":"Checking this box is required.","is-required":"1","is-required-message":"jak\u00e9 hled\u00e1te m\u00edsto?","validation-type":"none","validation-type-regex":"","validation-type-custom-function":"","validation-message":"This field is not valid.","min-length-has":"1","min-length":"2","min-length-message":"Zadejte jm\u00e9no m\u011bsta, kter\u00e9 hled\u00e1te."}'
               style={{ display: "inline" }}
