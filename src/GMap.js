@@ -188,13 +188,15 @@ class GMap extends Component {
         defaultCenter={{ lat: 49.15458, lng: 17.471093 }}
       >
         {this.props.prodejci
-          .filter(p =>
-            this.props.searchingCategories.some(
-              category =>
-                (p.popis || "")
-                  .toLowerCase()
-                  .indexOf(category.toLowerCase()) !== -1
-            )
+          .filter(
+            p =>
+              this.props.searchingCategories.length === 0 ||
+              this.props.searchingCategories.some(
+                category =>
+                  (p.popis || "")
+                    .toLowerCase()
+                    .indexOf(category.toLowerCase()) !== -1
+              )
           )
           .filter(p => {
             const reg = new RegExp(this.props.searchingValue, "i");
