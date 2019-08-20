@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from "react";
 const t = {
   header: {
     cs: "Naši prodejci",
-    en: "Our dealers"
+    en: "Our sellers"
   },
   searchInput: {
     cs: "Hledej",
