@@ -6,7 +6,7 @@ import GMap from "./GMap";
 // import * as serviceWorker from "./serviceWorker";
 
 export default function renderMap(
-  { data, language, googleKey },
+  { data, language, googleKey, defaultZoom },
   formContainer,
   mapContainer
 ) {
@@ -24,6 +24,7 @@ export default function renderMap(
         searchingValue={searchingValue}
         searchingCategories={searchingCategories}
         googleKey={googleKey}
+        defaultZoom={defaultZoom || 7}
       />,
       mapContainer
     );
