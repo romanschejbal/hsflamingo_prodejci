@@ -7,6 +7,17 @@ import {
   InfoWindow
 } from "react-google-maps";
 
+const t = {
+  loading: {
+    cs: "Načítám",
+    en: "Loading"
+  },
+  seeDetail: {
+    cs: "Podrobné informace",
+    en: "See detail"
+  }
+};
+
 const colorScheme = [
   {
     elementType: "geometry",
@@ -238,7 +249,7 @@ class GMap extends Component {
                       E-mail:{" "}
                       <a href={`mailto:${prodejce.email}`}>{prodejce.email}</a>
                     </p>
-                    <a href={url}>Podrobné informace</a>
+                    <a href={url}>{t.seeDetail[this.props.language]}</a>
                   </div>
                 </InfoWindow>
               ) : null}
@@ -258,13 +269,15 @@ export default function Map(props) {
     searchingValue,
     searchingCategories,
     googleKey,
+    language,
     defaultZoom
   } = props;
 
   return (
     <ConnectedMap
       googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${googleKey}`}
-      loadingElement={"Načítám"}
+      loadingElement={t.loading[language]}
+      language={language}
       containerElement={<div style={{ height: `${height}px` }} />}
       mapElement={<div style={{ height: `${height}px` }} />}
       prodejci={prodejci}

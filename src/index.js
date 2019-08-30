@@ -19,6 +19,7 @@ export default function renderMap(
   function renderMap() {
     ReactDOM.render(
       <GMap
+        language={language}
         prodejci={data}
         height={mapHeight}
         searchingValue={searchingValue}
