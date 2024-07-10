@@ -1,62 +1,73 @@
+// @ts-check
 import React from "react";
-import ReactDOM from "react-dom";
-// import "./index.css";
+import { createRoot } from "react-dom/client";
 import Form from "./Form";
 import GMap from "./GMap";
-// import * as serviceWorker from "./serviceWorker";
 
 export default function renderMap(
   { data, language, googleKey, defaultZoom },
   formContainer,
   mapContainer
 ) {
-  const formHeight = formContainer.offsetHeight;
   const mapHeight = mapContainer.offsetHeight;
   const categories =
     language === "cs" ? ["Stavba krbů", "Kamenný obchod", "Topenář"] : [];
-  let searchingValue = "";
+
+  if (process.env.NODE_ENV === "development") {
+    data = require("./prodejci.json");
+    window.prodejci = data;
+  }
+
   let searchingCategories = categories.slice(0);
+  let searchingValue = "";
+
+  const mapRoot = createRoot(mapContainer);
   function renderMap() {
-    ReactDOM.render(
+    mapRoot.render(
       <GMap
         language={language}
         prodejci={data}
         height={mapHeight}
-        searchingValue={searchingValue}
-        searchingCategories={searchingCategories}
         googleKey={googleKey}
         defaultZoom={defaultZoom || 7}
-      />,
-      mapContainer
+        categories={categories}
+        searchingCategories={searchingCategories}
+        searchingValue={searchingValue}
+      />
     );
   }
-  ReactDOM.render(
-    <Form
-      language={language}
-      categories={categories}
-      prodejci={data}
-      height={formHeight}
-      onSearch={value => {
-        searchingValue = value;
-        renderMap();
-      }}
-      onCategoryChange={(category, checked) => {
-        if (checked) {
-          searchingCategories.push(category);
-        } else {
-          searchingCategories = searchingCategories.filter(c => c !== category);
-        }
-        renderMap();
-      }}
-    />,
-    formContainer
-  );
+
+  const formRoot = createRoot(formContainer);
+  function renderForm() {
+    formRoot.render(
+      <Form
+        language={language}
+        categories={categories}
+        searchingCategories={searchingCategories}
+        onSearch={(value) => {
+          searchingValue = value;
+          renderForm();
+          renderMap();
+        }}
+        onCategoryChange={(category, checked) => {
+          if (checked) {
+            searchingCategories = [...searchingCategories, category];
+          } else {
+            searchingCategories = searchingCategories.filter(
+              (c) => c !== category
+            );
+          }
+          renderForm();
+          renderMap();
+        }}
+      />
+    );
+  }
+
+  renderForm();
   renderMap();
 
-  return () => {
-    ReactDOM.unmountComponentAtNode(formContainer);
-    ReactDOM.unmountComponentAtNode(mapContainer);
-  };
+  return () => {};
 }
 
 window.renderMap = renderMap;

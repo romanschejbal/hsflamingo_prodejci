@@ -1,21 +1,20 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
+  APIProvider,
+  Map,
   Marker,
-  InfoWindow
-} from "react-google-maps";
+  InfoWindow,
+} from "@vis.gl/react-google-maps";
 
 const t = {
   loading: {
     cs: "Načítám",
-    en: "Loading"
+    en: "Loading",
   },
   seeDetail: {
     cs: "Podrobné informace",
-    en: "See detail"
-  }
+    en: "See detail",
+  },
 };
 
 const colorScheme = [
@@ -23,246 +22,251 @@ const colorScheme = [
     elementType: "geometry",
     stylers: [
       {
-        color: "#f5f5f5"
-      }
-    ]
+        color: "#f5f5f5",
+      },
+    ],
   },
   {
     elementType: "labels.icon",
     stylers: [
       {
-        visibility: "off"
-      }
-    ]
+        visibility: "off",
+      },
+    ],
   },
   {
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#616161"
-      }
-    ]
+        color: "#616161",
+      },
+    ],
   },
   {
     elementType: "labels.text.stroke",
     stylers: [
       {
-        color: "#f5f5f5"
-      }
-    ]
+        color: "#f5f5f5",
+      },
+    ],
   },
   {
     featureType: "administrative.country",
     elementType: "geometry.stroke",
     stylers: [
       {
-        color: "#c3252e"
-      }
-    ]
+        color: "#c3252e",
+      },
+    ],
   },
   {
     featureType: "administrative.land_parcel",
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#bdbdbd"
-      }
-    ]
+        color: "#bdbdbd",
+      },
+    ],
   },
   {
     featureType: "poi",
     elementType: "geometry",
     stylers: [
       {
-        color: "#eeeeee"
-      }
-    ]
+        color: "#eeeeee",
+      },
+    ],
   },
   {
     featureType: "poi",
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#757575"
-      }
-    ]
+        color: "#757575",
+      },
+    ],
   },
   {
     featureType: "poi.park",
     elementType: "geometry",
     stylers: [
       {
-        color: "#e5e5e5"
-      }
-    ]
+        color: "#e5e5e5",
+      },
+    ],
   },
   {
     featureType: "poi.park",
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#9e9e9e"
-      }
-    ]
+        color: "#9e9e9e",
+      },
+    ],
   },
   {
     featureType: "road",
     elementType: "geometry",
     stylers: [
       {
-        color: "#ffffff"
-      }
-    ]
+        color: "#ffffff",
+      },
+    ],
   },
   {
     featureType: "road.arterial",
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#757575"
-      }
-    ]
+        color: "#757575",
+      },
+    ],
   },
   {
     featureType: "road.highway",
     elementType: "geometry",
     stylers: [
       {
-        color: "#dadada"
-      }
-    ]
+        color: "#dadada",
+      },
+    ],
   },
   {
     featureType: "road.highway",
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#616161"
-      }
-    ]
+        color: "#616161",
+      },
+    ],
   },
   {
     featureType: "road.local",
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#9e9e9e"
-      }
-    ]
+        color: "#9e9e9e",
+      },
+    ],
   },
   {
     featureType: "transit.line",
     elementType: "geometry",
     stylers: [
       {
-        color: "#e5e5e5"
-      }
-    ]
+        color: "#e5e5e5",
+      },
+    ],
   },
   {
     featureType: "transit.station",
     elementType: "geometry",
     stylers: [
       {
-        color: "#eeeeee"
-      }
-    ]
+        color: "#eeeeee",
+      },
+    ],
   },
   {
     featureType: "water",
     elementType: "geometry",
     stylers: [
       {
-        color: "#c9c9c9"
-      }
-    ]
+        color: "#c9c9c9",
+      },
+    ],
   },
   {
     featureType: "water",
     elementType: "labels.text.fill",
     stylers: [
       {
-        color: "#9e9e9e"
-      }
-    ]
-  }
+        color: "#9e9e9e",
+      },
+    ],
+  },
 ];
 
-class GMap extends Component {
-  state = { openedMarker: null };
+function GMap(props) {
+  const [selected, setSelected] = useState(null);
 
-  render() {
-    return (
-      <GoogleMap
-        options={{ styles: colorScheme }}
-        defaultZoom={this.props.defaultZoom}
-        defaultCenter={{ lat: 49.15458, lng: 17.471093 }}
-      >
-        {this.props.prodejci
-          .filter(
-            p =>
-              this.props.searchingCategories.length === 0 ||
-              this.props.searchingCategories.some(
-                category =>
-                  (p.popis || "")
-                    .toLowerCase()
-                    .indexOf(category.toLowerCase()) !== -1
-              )
-          )
-          .filter(p => {
-            const reg = new RegExp(this.props.searchingValue, "i");
-            return (
-              reg.test(p.nazev) ||
-              reg.test(p.ulice) ||
-              reg.test(p.mesto) ||
-              reg.test(p.psc) ||
-              reg.test(p.telefon) ||
-              reg.test(p.email)
-            );
-          })
-          .map(({ lat, lng, url, ...prodejce }, i) => (
-            <Marker
-              key={JSON.stringify({ lat, lng, ...prodejce })}
-              icon={{
-                scaledSize: { width: 27, height: 40 },
-                url: prodejce.isExpert
-                  ? "https://www.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
-                  : "https://www.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png"
-              }}
-              position={{ lat, lng }}
-              onMouseOver={() => this.setState({ openedMarker: i })}
-              onClick={() => this.setState({ openedMarker: i })}
-            >
-              {this.state.openedMarker === i ? (
-                <InfoWindow
-                  onCloseClick={() => this.setState({ openedMarker: null })}
-                >
-                  <div>
-                    <h4>{prodejce.nazev}</h4>
-                    <p>
-                      {prodejce.ulice}
-                      <br />
-                      {prodejce.psc} {prodejce.mesto}
-                      <br />
-                      Tel.: {prodejce.telefon}
-                      <br />
-                      E-mail:{" "}
-                      <a href={`mailto:${prodejce.email}`}>{prodejce.email}</a>
-                    </p>
-                    <a href={url}>{t.seeDetail[this.props.language]}</a>
-                  </div>
-                </InfoWindow>
-              ) : null}
-            </Marker>
-          ))}
-      </GoogleMap>
-    );
-  }
+  return (
+    <Map
+      options={{ styles: colorScheme }}
+      defaultZoom={props.defaultZoom}
+      defaultCenter={{ lat: 49.15458, lng: 17.471093 }}
+    >
+      {props.prodejci
+        .filter(
+          (p) =>
+            props.searchingCategories.length === 0 ||
+            props.searchingCategories.length === props.categories.length ||
+            props.searchingCategories.some(
+              (category) =>
+                (p.popis || "")
+                  .toLowerCase()
+                  .indexOf(category.toLowerCase()) !== -1
+            )
+        )
+        .filter((p) => {
+          const reg = new RegExp(props.searchingValue, "i");
+          return (
+            reg.test(p.nazev) ||
+            reg.test(p.ulice) ||
+            reg.test(p.mesto) ||
+            reg.test(p.psc) ||
+            reg.test(p.telefon) ||
+            reg.test(p.email)
+          );
+        })
+        .map(({ lat, lng, url, ...prodejce }, i) => (
+          <Marker
+            key={i}
+            position={{ lat, lng }}
+            icon={{
+              scaledSize: { width: 27, height: 40, equals: () => false },
+              url: prodejce.isExpert
+                ? "https://www.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Expert@2x.png"
+                : "https://www.hsflamingo.cz/wp-content/uploads/2018/12/map-v4-Partner@2x.png",
+            }}
+            onClick={(e) => {
+              setSelected({
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng(),
+                url,
+                ...prodejce,
+              });
+            }}
+            onMouseOver={(e) => {
+              // setSelected(props.prodejci[i]);
+            }}
+          />
+        ))}
+      {selected !== null ? (
+        <InfoWindow
+          position={{ lat: selected.lat, lng: selected.lng }}
+          onCloseClick={() => setSelected(null)}
+        >
+          <div>
+            <h4>{selected.nazev}</h4>
+            <p>
+              {selected.ulice}
+              <br />
+              {selected.psc} {selected.mesto}
+              <br />
+              Tel.: {selected.telefon}
+              <br />
+              E-mail: <a href={`mailto:${selected.email}`}>{selected.email}</a>
+            </p>
+            <a href={selected.url}>{t.seeDetail[props.language]}</a>
+          </div>
+        </InfoWindow>
+      ) : null}
+    </Map>
+  );
 }
 
-const ConnectedMap = withScriptjs(withGoogleMap(GMap));
-
-export default function Map(props) {
+export default function Wrapper(props) {
   const {
     prodejci,
     height,
@@ -270,20 +274,24 @@ export default function Map(props) {
     searchingCategories,
     googleKey,
     language,
-    defaultZoom
+    defaultZoom,
+    categories,
   } = props;
 
   return (
-    <ConnectedMap
-      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${googleKey}`}
-      loadingElement={t.loading[language]}
-      language={language}
-      containerElement={<div style={{ height: `${height}px` }} />}
-      mapElement={<div style={{ height: `${height}px` }} />}
-      prodejci={prodejci}
-      searchingValue={searchingValue}
-      searchingCategories={searchingCategories}
-      defaultZoom={defaultZoom}
-    />
+    <APIProvider apiKey={googleKey}>
+      <GMap
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${googleKey}`}
+        loadingElement={t.loading[language]}
+        language={language}
+        containerElement={<div style={{ height: `${height}px` }} />}
+        mapElement={<div style={{ height: `${height}px` }} />}
+        prodejci={prodejci}
+        categories={categories}
+        searchingValue={searchingValue}
+        searchingCategories={searchingCategories}
+        defaultZoom={defaultZoom}
+      />
+    </APIProvider>
   );
 }

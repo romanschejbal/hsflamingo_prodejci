@@ -1,31 +1,25 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 
 const t = {
   header: {
     cs: "Naši prodejci",
-    en: "Our sellers"
+    en: "Our sellers",
   },
   searchInput: {
     cs: "Hledej",
-    en: "Search"
-  }
+    en: "Search",
+  },
 };
 
 export default function Form({
   language,
   onSearch,
   categories,
-  onCategoryChange
+  searchingCategories,
+  onCategoryChange,
 }) {
-  const ref = useRef();
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    setHeight(ref.current.offsetHeight);
-  });
-
   return (
-    <form ref={ref} className="ff-custom-form fg-text-dark" action="#">
+    <form className="ff-custom-form fg-text-dark" action="#">
       <div
         style={{ padding: "20px 0px 10px" }}
         className="ffb-id-2m4m6dth fg-row row fg-text-dark"
@@ -36,7 +30,7 @@ export default function Form({
             style={{
               display: "inline",
               fontFamily: "Montserrat",
-              fontWeight: 500
+              fontWeight: 500,
             }}
           >
             {t.header[language]}
@@ -51,15 +45,18 @@ export default function Form({
               data-validation='{"checkbox-validation":"0","checkbox-validation-message":"Checking this box is required.","is-required":"1","is-required-message":"jak\u00e9 hled\u00e1te m\u00edsto?","validation-type":"none","validation-type-regex":"","validation-type-custom-function":"","validation-message":"This field is not valid.","min-length-has":"1","min-length":"2","min-length-message":"Zadejte jm\u00e9no m\u011bsta, kter\u00e9 hled\u00e1te."}'
               style={{ display: "inline" }}
               name="ff-contact-input-0"
-              onChange={e => onSearch(e.target.value)}
+              onChange={(e) => {
+                e.preventDefault();
+                onSearch(e.target.value);
+              }}
             />
           </p>
         </div>
         <div className="ffb-id-2m4m6ltd fg-col col-xs-6 col-md-3 fg-text-dark">
-          {categories.map(text => {
+          {categories.map((text, i) => {
             return (
               <div
-                key={text}
+                key={i}
                 className="ffb-id-2m4lja3i checkbox fg-text-dark"
                 data-fg-height='{"1":"15","2":"15","3":"15","4":"15"}'
                 style={{ display: "block" }}
@@ -68,11 +65,10 @@ export default function Form({
                   <input
                     type="checkbox"
                     className="ff-form-input ff-form-input-item"
-                    defaultChecked="checked"
-                    value={text}
-                    onChange={e =>
-                      onCategoryChange(e.target.value, e.target.checked)
-                    }
+                    checked={searchingCategories.includes(text)}
+                    onChange={(e) => {
+                      onCategoryChange(text, e.target.checked);
+                    }}
                   />{" "}
                   {text}
                 </label>
